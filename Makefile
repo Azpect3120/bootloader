@@ -30,5 +30,9 @@ $(BUILD_DIR)/kernel.bin:
 boot: clean $(BUILD_DIR)/main.img
 	qemu-system-i386 -fda $(BUILD_DIR)/main.img
 
+
+debug:
+	qemu-system-i386 -boot c -m 256 -hda $(BUILD_DIR)/main.img -s -S
+
 clean:
 	rm -f $(BUILD_DIR)/*
