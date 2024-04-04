@@ -1,7 +1,14 @@
 ASM=nasm
+ASM_FLAGS=-f obj
+
+CC16=/usr/bin/watcom/binl/wcc
+CFLAGS16=-s -wx -ms -zl -zq
+LD16=/usr/bin/watcom/binl/wlink
 
 SRC_DIR=src
 BUILD_DIR=build
+
+all: clean always floppy_image bootloader kernel
 
 #
 # Floppy Image (FAT12)
@@ -25,14 +32,27 @@ $(BUILD_DIR)/bootloader.bin:
 #
 kernel: $(BUILD_DIR)/kernel.bin
 $(BUILD_DIR)/kernel.bin:
-	$(ASM) $(SRC_DIR)/kernel/main.asm -f bin -o $(BUILD_DIR)/kernel.bin
+	$(ASM) $(ASM_FLAGS) -o $(BUILD_DIR)/kernel/asm/main.obj $(SRC_DIR)/kernel/main.asm
+	$(ASM) $(ASM_FLAGS) -o $(BUILD_DIR)/kernel/asm/print.obj $(SRC_DIR)/kernel/print.asm
+	$(CC16) $(CFLAGS16) -fo=$(BUILD_DIR)/kernel/c/main.obj $(SRC_DIR)/kernel/main.c
+	$(CC16) $(CFLAGS16) -fo=$(BUILD_DIR)/kernel/c/stdio.obj $(SRC_DIR)/kernel/stdio.c
+	$(LD16) name $(BUILD_DIR)/kernel.bin FILE \{$(BUILD_DIR)/kernel/asm/main.obj $(BUILD_DIR)/kernel/asm/print.obj $(BUILD_DIR)/kernel/c/main.obj $(BUILD_DIR)/kernel/c/stdio.obj \} OPTION MAP=$(BUILD_DIR)/kernel.map @$(SRC_DIR)/kernel/linker.lnk
 
-boot: clean $(BUILD_DIR)/main.img
+
+always:
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/kernel
+	mkdir -p $(BUILD_DIR)/kernel/asm
+	mkdir -p $(BUILD_DIR)/kernel/c
+
+#
+# Running OS
+#
+boot:
 	qemu-system-i386 -fda $(BUILD_DIR)/main.img
-
 
 debug:
 	qemu-system-i386 -boot c -m 256 -hda $(BUILD_DIR)/main.img -s -S
 
 clean:
-	rm -f $(BUILD_DIR)/*
+	rm -rf $(BUILD_DIR)/*

@@ -40,3 +40,8 @@ S = (LBA % sectors per track) + 1
 H = t % number of heads
 
 C = t / number of headers
+
+## 16 Bit C Compiler
+```
+https://github.com/open-watcom/open-watcom-v2/releases
+```
