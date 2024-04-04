@@ -6,22 +6,12 @@ void putc(char c) {
 }
 
 void puts(const char* s) {
-  while (*s) {
-    putc(*s);
-    s++;
-  }
-}
-
-void xputs(const char* s, int c) {
-  int i = 0;
-  while (i < c) {
-    puts(s);
-    i++;
-  }
+  x86_Video_WriteStringTeletype(s, 0);
 }
 
 void putcln(char c) {
   x86_Video_WriteCharTeletypeLine(c, 0);
 }
-void putsln(const char* s) {}
-void xputsln(const char* s, int c) {}
+void putsln(const char* s) {
+  x86_Video_WriteStringTeletypeLine(s, 0);
+}

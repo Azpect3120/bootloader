@@ -1,7 +1,7 @@
 Open Watcom Linker Version 2.0 beta Apr  2 2024 08:27:08 (32-bit)
 Copyright (c) 2002-2024 The Open Watcom Contributors. All Rights Reserved.
 Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
-Created on:       24/04/03 23:00:04
+Created on:       24/04/04 08:14:39
 Executable Image: build/kernel.bin
 creating a RAW Binary Image executable
 
@@ -13,7 +13,7 @@ creating a RAW Binary Image executable
 Group                           Address              Size
 =====                           =======              ====
 
-DGROUP                          000000a6             00000000
+DGROUP                          000000d6             00000062
 
 
 
@@ -25,10 +25,10 @@ Segment                Class          Group          Address         Size
 =======                =====          =====          =======         ====
 
 _ENTRY                 CODE           AUTO           00000000        00000010
-_TEXT                  CODE           AUTO           00000010        00000096
-CONST                  DATA           DGROUP         000000a6        00000000
-CONST2                 DATA           DGROUP         000000a6        00000000
-_DATA                  DATA           DGROUP         000000a6        00000000
+_TEXT                  CODE           AUTO           00000010        000000c5
+CONST                  DATA           DGROUP         000000d6        00000061
+CONST2                 DATA           DGROUP         00000138        00000000
+_DATA                  DATA           DGROUP         00000138        00000000
 
 
                         +----------------+
@@ -46,15 +46,15 @@ Module: build/kernel/asm/main.obj(src/kernel/main.asm)
 Module: build/kernel/asm/print.obj(src/kernel/print.asm)
 00000010       _x86_Video_WriteCharTeletype
 00000023       _x86_Video_WriteCharTeletypeLine
-Module: build/kernel/c/main.obj(/home/azpect/Documents/Projects/BootLoader/OS/src/kernel/main.c)
-00000042       _cstart_
-Module: build/kernel/c/stdio.obj(/home/azpect/Documents/Projects/BootLoader/OS/src/kernel/stdio.c)
-00000060+      putc_
-00000072*      xputsln_
-00000072*      putsln_
-00000073+      puts_
-00000084*      xputs_
-00000098       putcln_
+00000042       _x86_Video_WriteStringTeletype
+00000060       _x86_Video_WriteStringTeletypeLine
+Module: build/kernel/c/main.obj(/home/azpect/Documents/Projects/bootloader/src/kernel/main.c)
+0000008a       _cstart_
+Module: build/kernel/c/stdio.obj(/home/azpect/Documents/Projects/bootloader/src/kernel/stdio.c)
+0000009c*      putc_
+000000af*      puts_
+000000bb*      putcln_
+000000c9       putsln_
 
 
                         +---------------------+
@@ -70,17 +70,17 @@ Module          Segment               Class           Address         Size
 src/kernel/main.asm
                 _ENTRY                CODE           00000000         00000010
 src/kernel/print.asm
-                _TEXT                 CODE           00000010         00000032
-/home/azpect/Documents/Projects/BootLoader/OS/src/kernel/main.c
-                _TEXT                 CODE           00000042         0000001e
-                CONST                 DATA           000000a6         00000000
-                CONST2                DATA           000000a6         00000000
-                _DATA                 DATA           000000a6         00000000
-/home/azpect/Documents/Projects/BootLoader/OS/src/kernel/stdio.c
-                _TEXT                 CODE           00000060         00000046
-                CONST                 DATA           000000a6         00000000
-                CONST2                DATA           000000a6         00000000
-                _DATA                 DATA           000000a6         00000000
+                _TEXT                 CODE           00000010         0000007a
+/home/azpect/Documents/Projects/bootloader/src/kernel/main.c
+                _TEXT                 CODE           0000008a         00000012
+                CONST                 DATA           000000d6         00000061
+                CONST2                DATA           00000138         00000000
+                _DATA                 DATA           00000138         00000000
+/home/azpect/Documents/Projects/bootloader/src/kernel/stdio.c
+                _TEXT                 CODE           0000009c         00000039
+                CONST                 DATA           00000138         00000000
+                CONST2                DATA           00000138         00000000
+                _DATA                 DATA           00000138         00000000
 Warning! W1014: stack segment not found
 
 
@@ -89,6 +89,6 @@ Warning! W1014: stack segment not found
                         +-----------------------+
 
 Stack size:  0200 (512.)
-Memory size:  00a6 (166.)
+Memory size:  0138 (312.)
 Entry point address: 00000000
 Link time: 00:00.00
