@@ -1,7 +1,7 @@
 Open Watcom Linker Version 2.0 beta Apr  2 2024 08:27:08 (32-bit)
 Copyright (c) 2002-2024 The Open Watcom Contributors. All Rights Reserved.
 Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
-Created on:       24/04/04 08:14:39
+Created on:       24/04/04 09:06:01
 Executable Image: build/kernel.bin
 creating a RAW Binary Image executable
 
@@ -13,7 +13,7 @@ creating a RAW Binary Image executable
 Group                           Address              Size
 =====                           =======              ====
 
-DGROUP                          000000d6             00000062
+DGROUP                          000000d2             00000036
 
 
 
@@ -25,10 +25,10 @@ Segment                Class          Group          Address         Size
 =======                =====          =====          =======         ====
 
 _ENTRY                 CODE           AUTO           00000000        00000010
-_TEXT                  CODE           AUTO           00000010        000000c5
-CONST                  DATA           DGROUP         000000d6        00000061
-CONST2                 DATA           DGROUP         00000138        00000000
-_DATA                  DATA           DGROUP         00000138        00000000
+_TEXT                  CODE           AUTO           00000010        000000c2
+CONST                  DATA           DGROUP         000000d2        00000035
+CONST2                 DATA           DGROUP         00000108        00000000
+_DATA                  DATA           DGROUP         00000108        00000000
 
 
                         +----------------+
@@ -51,10 +51,10 @@ Module: build/kernel/asm/print.obj(src/kernel/print.asm)
 Module: build/kernel/c/main.obj(/home/azpect/Documents/Projects/bootloader/src/kernel/main.c)
 0000008a       _cstart_
 Module: build/kernel/c/stdio.obj(/home/azpect/Documents/Projects/bootloader/src/kernel/stdio.c)
-0000009c*      putc_
-000000af*      puts_
-000000bb*      putcln_
-000000c9       putsln_
+00000099*      putc_
+000000ac       puts_
+000000b8*      putcln_
+000000c6*      putsln_
 
 
                         +---------------------+
@@ -72,15 +72,15 @@ src/kernel/main.asm
 src/kernel/print.asm
                 _TEXT                 CODE           00000010         0000007a
 /home/azpect/Documents/Projects/bootloader/src/kernel/main.c
-                _TEXT                 CODE           0000008a         00000012
-                CONST                 DATA           000000d6         00000061
-                CONST2                DATA           00000138         00000000
-                _DATA                 DATA           00000138         00000000
+                _TEXT                 CODE           0000008a         0000000f
+                CONST                 DATA           000000d2         00000035
+                CONST2                DATA           00000108         00000000
+                _DATA                 DATA           00000108         00000000
 /home/azpect/Documents/Projects/bootloader/src/kernel/stdio.c
-                _TEXT                 CODE           0000009c         00000039
-                CONST                 DATA           00000138         00000000
-                CONST2                DATA           00000138         00000000
-                _DATA                 DATA           00000138         00000000
+                _TEXT                 CODE           00000099         00000039
+                CONST                 DATA           00000108         00000000
+                CONST2                DATA           00000108         00000000
+                _DATA                 DATA           00000108         00000000
 Warning! W1014: stack segment not found
 
 
@@ -89,6 +89,6 @@ Warning! W1014: stack segment not found
                         +-----------------------+
 
 Stack size:  0200 (512.)
-Memory size:  0138 (312.)
+Memory size:  0108 (264.)
 Entry point address: 00000000
 Link time: 00:00.00

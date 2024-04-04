@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "stdint.h"
 #include "print.h"
 
 void putc(char c) {
@@ -6,6 +7,7 @@ void putc(char c) {
 }
 
 void puts(const char* s) {
+  int len = custom_strlen(s);
   x86_Video_WriteStringTeletype(s, 0);
 }
 
@@ -14,4 +16,12 @@ void putcln(char c) {
 }
 void putsln(const char* s) {
   x86_Video_WriteStringTeletypeLine(s, 0);
+}
+
+int custom_strlen(const char* str) {
+    int length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+    return length;
 }
