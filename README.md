@@ -73,3 +73,37 @@ SEGMENT:
 ```
 
 Overall, the linker.lnk file provides instructions to the linker on how to organize and link different sections of code and data to produce the final executable file. It specifies options, entry points, memory layout, and segment ordering to ensure that the program behaves as expected when executed.
+
+## Returning values in ASM implementations
+
+```c
+double(entier n) { return n + n; }
+```
+
+Since it appears that you are throughly confused by this, let me just show you how to do it:
+
+```asm
+double: push ebp       ; establish...
+    mov ebp, esp       ; ...stack frame
+
+    mov eax, [ebp + 8] ; load argument from stack into eax
+    add eax, eax       ; add it to itself
+
+    leave              ; tear down the stack frame
+    ret                ; return to the caller
+```
+
+Note that I chose eax instead of ebx for the register. This is for two reasons:
+
+- `eax` is a caller-saved register (meaning that the caller must take care to preserve its 
+    value if desired) whereas `ebx` is a callee-saved register (meaning that the callee, i.e.
+    double must preserve its value). If we wanted to use `ebx`, we had to save and restore 
+    its old value. If we use a caller-saved register like eax instead, we can avoid this effort.
+
+- `eax` is the register where by convention the return value is found. The caller will take the 
+    value of `eax` as the return value.
+
+- In almost all calling conventions for x86, the return value is whatever value is found in `eax`
+    on return. Thus, by placing the result of the addition in `eax`, we don't have to do any extra 
+    work to set up the return value.
+
