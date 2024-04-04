@@ -5,3 +5,4 @@
 // defined globally in `kernel/print.asm`.
 void __cdecl x86_Video_WriteCharTeletype(char c, uint8_t page);
 
+char __cdecl x86_Video_ReadCharAtCursor(uint8_t page);

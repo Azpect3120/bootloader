@@ -22,3 +22,7 @@ int add(int a, int b) {
   return sum;
 }
 
+char readChar() {
+  return x86_Video_ReadCharAtCursor(0);
+}
+

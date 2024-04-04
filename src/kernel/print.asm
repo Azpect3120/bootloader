@@ -9,7 +9,6 @@ global _x86_Video_WriteCharTeletype
 _x86_Video_WriteCharTeletype:
   push bp
   mov bp, sp
-
   push bx
 
   mov ah, 0x0E
@@ -22,4 +21,29 @@ _x86_Video_WriteCharTeletype:
   mov sp, bp
   pop bp
   
+  ret
+
+global _x86_Video_ReadCharAtCursor
+_x86_Video_ReadCharAtCursor:
+  push bp
+  mov bp, sp
+  push bx
+
+  ; Get char from position
+  mov ah, 0x08
+  mov bh, byte [bp+4]
+
+  ; inp: al = 08
+  ; inp: bh = display page
+  ; out: ah = attribute of character
+  ; out: al = character at cursor position
+  int 0x10
+
+  ; Load char into `eax` register
+  movzx eax, al
+
+  pop bx
+  mov sp, bp
+  pop bp
+
   ret
