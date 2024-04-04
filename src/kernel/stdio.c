@@ -2,26 +2,16 @@
 #include "stdint.h"
 #include "print.h"
 
+// Print a character by calling the `10h (0Eh)` BIOS interrupt
 void putc(char c) {
+  // Assembly implementation
   x86_Video_WriteCharTeletype(c, 0);
 }
 
+// Print a string by calling the `putc` function for each character
 void puts(const char* s) {
-  int len = custom_strlen(s);
-  x86_Video_WriteStringTeletype(s, 0);
-}
-
-void putcln(char c) {
-  x86_Video_WriteCharTeletypeLine(c, 0);
-}
-void putsln(const char* s) {
-  x86_Video_WriteStringTeletypeLine(s, 0);
-}
-
-int custom_strlen(const char* str) {
-    int length = 0;
-    while (str[length] != '\0') {
-        length++;
-    }
-    return length;
+  while (*s) {
+    putc(*s);
+    s++;
+  }
 }
