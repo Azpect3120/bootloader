@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "math.h"
 #include "stdint.h"
 #include "print.h"
 
@@ -11,7 +12,13 @@ void putc(char c) {
 // Print a string by calling the `putc` function for each character
 void puts(const char* s) {
   while (*s) {
-    putc(*s);
+    x86_Video_WriteCharTeletype(*s, 0);
     s++;
   }
 }
+
+int add(int a, int b) {
+  int8_t sum = x86_Add_Int_8(a, b);
+  return sum;
+}
+
