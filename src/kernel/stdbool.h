@@ -1,5 +1,6 @@
 #pragma once
+#include "stdint.h"
 
-typedef int bool_t;
+typedef uint8_t bool_t;
 #define true 1
 #define false 0

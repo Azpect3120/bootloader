@@ -22,3 +22,36 @@ _x86_Video_WriteCharTeletype:
   pop bp
   
   ret
+
+
+; Defines global function to divide a 64 bit number by a 32 bit number.
+global _x86_div64_32
+_x86_div64_32:
+  push bp
+  mov bp, sp
+
+  push bx
+
+  mov eax, [bp+8]   ; Upper 32 bits of dividend
+  mov ecx, [bp+12]  ; Full 32 bits of divisor
+  xor edx, edx      ; Where the remainder will be placed
+  
+  div ecx           ; Divide EAX by ECX, result in EAX, remainder in EDX
+
+  mov bx, [bp+16]   ; Upper 32 bits of quotient
+  mov [bx], eax
+
+  mov eax, [bp+4]   ; Lower 32 bits of dividend
+  div ecx           ; Divide EAX by ECX, result in EAX, remainder in EDX
+
+  mov [bx], eax
+  mov bx, [bp+18]   ; Lower 32 bits of quotient
+  mov [bx], edx
+
+  pop bx
+
+  mov sp, bp
+  pop bp
+
+  ret
+

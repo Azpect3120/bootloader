@@ -1,0 +1,7 @@
+src/kernel/main.c(6): Error! E1009: Expecting ';' but found '{'
+src/kernel/main.c(10): Error! E1077: Missing '}'
+src/kernel/stdio.h(8): Warning! W303: Parameter 'arg_ptr' has been defined, but not referenced
+src/kernel/stdio.h(8): Warning! W303: Parameter 'sign' has been defined, but not referenced
+src/kernel/stdio.h(8): Warning! W303: Parameter 'length' has been defined, but not referenced
+src/kernel/stdio.h(8): Warning! W303: Parameter 'radix' has been defined, but not referenced
+src/kernel/main.c(10): Warning! W107: Missing return value for function 'printf_number'

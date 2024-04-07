@@ -1,0 +1,7 @@
+src/kernel/stdio.c(27): Error! E1011: Symbol 'bool_t' has not been declared
+src/kernel/stdio.c(27): Error! E1009: Expecting ';' but found 'sign'
+src/kernel/stdio.c(27): Error! E1011: Symbol 'sign' has not been declared
+src/kernel/stdio.c(23): Warning! W202: Symbol 'arg_ptr' has been defined, but not referenced
+src/kernel/stdio.c(24): Warning! W202: Symbol 'state' has been defined, but not referenced
+src/kernel/stdio.c(25): Warning! W202: Symbol 'length' has been defined, but not referenced
+src/kernel/stdio.c(26): Warning! W202: Symbol 'radix' has been defined, but not referenced
